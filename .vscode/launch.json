@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Pikachu Game",
+            "request": "launch",
+            "mainClass": "main.GameMain",
+            "cwd": "${workspaceFolder}/bin",
+            "console": "integratedTerminal"
+        }
+    ]
+}
