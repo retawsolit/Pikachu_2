@@ -9,7 +9,7 @@ public class ImagePanel extends JPanel {
     private Image background;
 
     public ImagePanel(String imagePath) {
-        this.background = new ImageIcon(imagePath).getImage();
+        this.background = new ImageIcon(getClass().getClassLoader().getResource(imagePath)).getImage();
     }
 
     @Override

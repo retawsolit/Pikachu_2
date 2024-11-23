@@ -5,6 +5,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
 import java.awt.Color;
+import utils.ImageLoader;
+import javax.swing.ImageIcon;
 
 public class GamePanel extends JPanel {
     private JButton[] buttons;
@@ -12,10 +14,12 @@ public class GamePanel extends JPanel {
 
     public GamePanel() {
         setLayout(new GridLayout(6, 10));
-        buttons = new JButton[60];
+        buttons = new TileButton[60];  // Use TileButton instead of JButton
 
         for (int i = 0; i < buttons.length; i++) {
-            buttons[i] = new JButton();
+            // Assuming ImageLoader.getImage(i) returns a valid ImageIcon
+            ImageIcon icon = ImageLoader.getImage(i);
+            buttons[i] = new TileButton(i, icon);  // Use TileButton instead
             add(buttons[i]);
         }
 
