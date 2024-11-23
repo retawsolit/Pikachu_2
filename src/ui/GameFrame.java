@@ -4,12 +4,12 @@ import javax.swing.JFrame;
 
 public class GameFrame extends JFrame {
     public GameFrame() {
-        setTitle("Pikachu");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("Pikachu Game");
         setSize(800, 600);
-        setResizable(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
 
-        GamePanel panel = new GamePanel();
-        setContentPane(panel);
+        GamePanel gamePanel = new GamePanel();
+        add(gamePanel);
     }
 }

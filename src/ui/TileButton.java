@@ -4,14 +4,14 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 
 public class TileButton extends JButton {
-    private int value;
+    private final int id;
 
-    public TileButton(int value, ImageIcon icon) {
-        this.value = value;
-        setIcon(icon);
+    public TileButton(int id, ImageIcon icon) {
+        super(icon);
+        this.id = id;
     }
 
-    public int getValue() {
-        return value;
+    public int getId() {
+        return id;
     }
 }

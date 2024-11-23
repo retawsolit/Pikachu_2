@@ -1,25 +1,36 @@
 package ui;
 
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import java.awt.GridLayout;
-import java.awt.Color;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import utils.ImageLoader;
-import javax.swing.ImageIcon;
+import java.util.ArrayList;
+import java.util.Collections;
 
-public class GamePanel extends JPanel {
-    private JButton[] buttons;
+public class GamePanel extends JPanel implements ActionListener {
+    private TileButton[] buttons;
     private JLabel scoreLabel, timeLabel;
+    private TileButton firstSelected = null;
+    private int score = 0;
 
     public GamePanel() {
         setLayout(new GridLayout(6, 10));
-        buttons = new TileButton[60];  // Use TileButton instead of JButton
+        buttons = new TileButton[36]; // Tổng cộng 36 ô để tìm cặp
+        ArrayList<Integer> icons = new ArrayList<>();
+
+        // Thêm các cặp hình ảnh (mỗi hình ảnh có 2 bản sao)
+        for (int i = 0; i < 18; i++) {
+            icons.add(i);
+            icons.add(i);
+        }
+
+        Collections.shuffle(icons);
 
         for (int i = 0; i < buttons.length; i++) {
-            // Assuming ImageLoader.getImage(i) returns a valid ImageIcon
-            ImageIcon icon = ImageLoader.getImage(i);
-            buttons[i] = new TileButton(i, icon);  // Use TileButton instead
+            ImageIcon icon = ImageLoader.getImage(icons.get(i));
+            buttons[i] = new TileButton(icons.get(i), icon);
+            buttons[i].addActionListener(this);
             add(buttons[i]);
         }
 
@@ -27,5 +38,30 @@ public class GamePanel extends JPanel {
         timeLabel = new JLabel("Time: 120");
         add(scoreLabel);
         add(timeLabel);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        TileButton clickedButton = (TileButton) e.getSource();
+
+        if (firstSelected == null) {
+            // Lựa chọn ô đầu tiên
+            firstSelected = clickedButton;
+            firstSelected.setEnabled(false);
+        } else {
+            // Lựa chọn ô thứ hai
+            if (firstSelected.getId() == clickedButton.getId()) {
+                // Tìm thấy cặp trùng
+                clickedButton.setEnabled(false);
+                firstSelected.setVisible(false);
+                clickedButton.setVisible(false);
+                score += 10;
+                scoreLabel.setText("Score: " + score);
+            } else {
+                // Không trùng, bật lại ô đầu tiên
+                firstSelected.setEnabled(true);
+            }
+            firstSelected = null;
+        }
     }
 }
