@@ -7,7 +7,7 @@ public class ImageLoader {
     private static final HashMap<Integer, ImageIcon> imageMap = new HashMap<>();
 
     static {
-        for (int i = 0; i < 37; i++) { // Số lượng hình ảnh từ h0 đến h36
+        for (int i = 0; i < 37; i++) { // Number of images from h0 to h36
             String path = "resources/h" + i + ".jpg";
             try {
                 ImageIcon icon = new ImageIcon(path);
